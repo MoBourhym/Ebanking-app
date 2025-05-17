@@ -23,7 +23,6 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Slf4j
 public class BankAccountServiceImpl implements BankAccountService {
 
@@ -53,7 +52,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         savingAccount.setInterestRate(intrestRate);
         SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
 
-        return null;
+        return savedBankAccount;
     }
 
     @Override

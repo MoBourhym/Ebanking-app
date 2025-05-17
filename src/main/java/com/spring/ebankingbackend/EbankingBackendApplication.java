@@ -46,8 +46,8 @@ public class EbankingBackendApplication {
                     List<BankAccount> bankAccounts = bankAccountService.bankAccountList();
                     for (BankAccount account : bankAccounts) {
                         for (int i = 0; i < 10; i++) {
-                            bankAccountService.credit(account.getId(), 1000 + Math.random() * 12000, "Credit");
-                            bankAccountService.debit(account.getId(), 1000 + Math.random() * 9000, "Debit");
+                            bankAccountService.credit(account.getId(), 100 + Math.random() * 12000, "Credit");
+                            bankAccountService.debit(account.getId(), 100 + Math.random() * 9000, "Debit");
                         }
                     }
                 } catch (CustomerNotFoundException | BankAccountNotFoundException | BalanceNotSufficentException e) {
@@ -80,7 +80,7 @@ public class EbankingBackendApplication {
 
                 CurrentAccount currentAccount = new CurrentAccount();
                 currentAccount.setId(UUID.randomUUID().toString());
-                currentAccount.setBalance(Math.random() * 10000);
+                currentAccount.setBalance(Math.random() * 1000000);
                 currentAccount.setCreatedAt(new java.util.Date());
                 currentAccount.setStatus(AccountStatus.CREATED);
                 currentAccount.setAccountOperations(null);
