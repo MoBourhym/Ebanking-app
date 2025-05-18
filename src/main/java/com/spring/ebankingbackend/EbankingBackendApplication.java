@@ -1,5 +1,6 @@
 package com.spring.ebankingbackend;
 
+import com.spring.ebankingbackend.dtos.CustomerDTO;
 import com.spring.ebankingbackend.entities.*;
 import com.spring.ebankingbackend.enums.AccountStatus;
 import com.spring.ebankingbackend.enums.OperationType;
@@ -32,10 +33,10 @@ public class EbankingBackendApplication {
         return args -> {
             Stream.of("Soufian", "Mouad", "Yassine", "Hicham")
                     .forEach(name -> {
-                        Customer customer = new Customer();
-                        customer.setName(name);
-                        customer.setEmail(name + "@gmail.com");
-                        bankAccountService.saveCustomer(customer);
+                        CustomerDTO customerDTO = new CustomerDTO();
+                        customerDTO.setName(name);
+                        customerDTO.setEmail(name + "@gmail.com");
+                        bankAccountService.saveCustomer(customerDTO);
                     });
 
 

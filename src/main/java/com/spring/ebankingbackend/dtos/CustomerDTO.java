@@ -1,4 +1,4 @@
-package com.spring.ebankingbackend.mappers;
+package com.spring.ebankingbackend.dtos;
 
 
 import lombok.AllArgsConstructor;
