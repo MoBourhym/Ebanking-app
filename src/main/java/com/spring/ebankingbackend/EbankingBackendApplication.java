@@ -1,5 +1,6 @@
 package com.spring.ebankingbackend;
 
+import com.spring.ebankingbackend.dtos.BankAccountDTO;
 import com.spring.ebankingbackend.dtos.CustomerDTO;
 import com.spring.ebankingbackend.entities.*;
 import com.spring.ebankingbackend.enums.AccountStatus;
@@ -44,8 +45,8 @@ public class EbankingBackendApplication {
                 try {
                     bankAccountService.saveCurrentBankAccount(Math.random() * 90000, 9000, customer.getId());
                     bankAccountService.saveSavingBankAccount(Math.random() * 120000, 5.5, customer.getId());
-                    List<BankAccount> bankAccounts = bankAccountService.bankAccountList();
-                    for (BankAccount account : bankAccounts) {
+                    List<BankAccountDTO> bankAccounts = bankAccountService.bankAccountList();
+                    for (BankAccountDTO account : bankAccounts) {
                         for (int i = 0; i < 10; i++) {
                             bankAccountService.credit(account.getId(), 100 + Math.random() * 12000, "Credit");
                             bankAccountService.debit(account.getId(), 100 + Math.random() * 9000, "Debit");
