@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -181,7 +182,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public List<AccountOperationDTO> accountHistory(String accountId) {
-        List<AccountOperation> accountOperations = accountOperationRepository.findtByBankAccountId(accountId);
+        List<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountId(accountId);
         return accountOperations.stream().map((op) -> dtoMapper.fromAccountOperation(op)).collect(Collectors.toList());
     }
 
@@ -189,7 +190,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     public AccountHistoryDTO getAccountHistory(String accountId, int page, int size) throws BankAccountNotFoundException {
         BankAccount bankAccount=bankAccountRepository.findById(accountId).orElse(null);
         if(bankAccount==null){throw new BankAccountNotFoundException("Bank account not found");}
-        Page<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountId(accountId, page, size);
+        Page<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountIdOrderByOperationDateDesc(accountId, PageRequest.of(page, size));
         AccountHistoryDTO accountHistoryDTO = new AccountHistoryDTO();
         List<AccountOperationDTO> accountOperationDTOS = accountOperations.getContent().stream().map((op) -> dtoMapper.fromAccountOperation(op)).collect(Collectors.toList());
         accountHistoryDTO.setAccountId(bankAccount.getId());
