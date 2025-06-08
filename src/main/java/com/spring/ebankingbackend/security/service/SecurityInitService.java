@@ -30,6 +30,11 @@ public class SecurityInitService implements CommandLineRunner {
             log.info("Initializing security roles and admin user");
             initRoles();
             initAdminUser();
+        } else {
+            // Check if admin user exists and has proper roles
+            if (!userRepository.findByUsername("admin").isPresent()) {
+                initAdminUser();
+            }
         }
     }
 
@@ -46,6 +51,12 @@ public class SecurityInitService implements CommandLineRunner {
     }
 
     private void initAdminUser() {
+        // Check if admin user already exists
+        if (userRepository.findByUsername("admin").isPresent()) {
+            log.info("Admin user already exists");
+            return;
+        }
+        
         // Get roles
         AppRole adminRole = roleRepository.findByName("ROLE_ADMIN")
                 .orElseThrow(() -> new RuntimeException("Admin role not found"));

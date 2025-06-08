@@ -23,7 +23,7 @@ public class CustomerWebController {
     private BankAccountService bankAccountService;
 
     @GetMapping("/customers")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+        @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public List<CustomerDTO> customers() {
         return bankAccountService.listCustormers();
     }

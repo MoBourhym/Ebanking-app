@@ -5,6 +5,9 @@ import com.spring.ebankingbackend.security.dto.AuthenticationResponse;
 import com.spring.ebankingbackend.security.dto.RegisterRequest;
 import com.spring.ebankingbackend.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +20,14 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
+    public ResponseEntity<?> register(
             @RequestBody RegisterRequest request
     ) {
-        return ResponseEntity.ok(authenticationService.register(request));
+        authenticationService.register(request);
+        return ResponseEntity.ok(Map.of(
+        "message", "User registered successfully",
+        "username", request.getUsername()
+    ));
     }
 
     @PostMapping("/authenticate")

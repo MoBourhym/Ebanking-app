@@ -132,7 +132,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         accountOperation.setDescription(description);
         accountOperation.setBankAccount(bankAccount);
         accountOperationRepository.save(accountOperation);
-        bankAccount.setBalance(bankAccount.getBalance() - amount);
+        bankAccount.setBalance(bankAccount.getBalance() + amount);
         bankAccountRepository.save(bankAccount);
     }
 
